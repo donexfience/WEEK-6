@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard </title>
+  <link rel="stylesheet" href="/stylesheets/adminss.css">
+  <!-- Font Awesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <ul>
+        <li>
+          <a href="#" class="logo">
+            
+            {{#if admin}}
+            <img src="/images/my photo.png" alt="Logo">
+            <span class="nav-item">{{admin.Email}}</span>
+            {{else}}
+            <span class="nav-item">not admin</span>
+            {{/if}}
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-menorah"></i>
+            <span class="nav-item">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-comment"></i>
+            <span class="nav-item">Message</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-database"></i>
+            <span class="nav-item">Report</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-chart-bar"></i>
+            <span class="nav-item">Attendance</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-cog"></i>
+            <span class="nav-item">Setting</span>
+          </a>
+        </li>
+        <li>
+          {{#if admin}}
+          <a href="/admin/admin/adminlogout" class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="nav-item">Log out</span>
+          </a>
+          {{else}}
+          
+            <a href="/loginadmin" class="logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="nav-item">Log in</span>
+            {{/if}}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="main">
+      <div class="main-top"></div>
+      <div class="users">
+        {{#each users}}
+        <div class="card">
+          <img src="/images/1.png" alt="User Image">
+          <h4>{{Username}}</h4>
+          <p><p>{{Email}}</p></p>
+          <div class="per">
+            <table>
+              <tr>
+                <td><span>85%</span></td>
+                <td><span>82%</span></td>
+              </tr>
+              <tr>
+                <td>Month</td>
+                <td>Year</td>
+              </tr>
+            </table>
+          </div>
+          <button>Send message</button>
+        </div>
+        {{/each}}
+      </div>
+        <div class="attendance-list">
+          <h1>Users Lists</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>UserName</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th colspan="2">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each users}}
+              <tr class="active">
+                <td>1</td>
+                <td>{{Username}}</td>
+                <td>{{password}}</td>
+                <td>{{Email}}</td>
+                <td>{{Number}}</td>
+                
+                
+                <td><button onclick="return confirm('Are you sure to delete {{this.Username}}')"><a href="/admin/delete-user?id={{this._id}}">Delete</a></button></td>
+                <td><button><a href="/admin/edit-user/{{this._id}}">Edit</a></button></td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+          <div class="search">
+          <form action="/admin/search-users" method="get">
+          <input type="text" class="searchTerm" placeholder="Search Users" name="query">
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+            </button>
+          </form>
+          <div class="action-buttons">
+          <a href="./admin/add-user" class="add-users-button">Add users <i class="fas fa-user-cog"></i></a>
+          </div>
+          </div>
+
+        </div>
+        {{!-- <div class="search">
+        <input type="text" class="searchTerm" placeholder="Search Users">
+        <button type="submit" class="searchButton">
+          <i class="fa fa-search"></i>
+        </button>
+          <div class="action-buttons">
+          <a href="./admin/add-user" class="add-users-button">Add users <i class="fas fa-user-cog"></i></a>
+        </div>
+      </div>  --}}
+      </section>
+ 
+</body>
+</html>
